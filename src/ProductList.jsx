@@ -262,7 +262,7 @@ function ProductList() {
                     </div>
                 </div>
                 <div>
-                    <a href="#" onClick={handleCartClick} style={{ color: 'white', fontSize: '30px', textDecoration: 'none' }}>
+                   <a href="#" onClick={handleCartClick} style={{ color: 'white', fontSize: '30px', textDecoration: 'none' }}>
                         <h1 className='cart'>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="IconChangeColor" height="68" width="68">
                                 <rect width="156" height="156" fill="none"></rect>
@@ -270,11 +270,11 @@ function ProductList() {
                                 <circle cx="184" cy="216" r="12"></circle>
                                 <path d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8" fill="none" stroke="#faf9f9" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
                             </svg>
+                            {cartCount > 0 && <span className="cart-count">{cartCount}</span>} {/* Display cart count */}
                         </h1>
                     </a>
                 </div>
             </div>
-            
             {!showCart ? (
                 <div className="product-grid">
                     {plantsArray.map((category, index) => (
@@ -287,8 +287,14 @@ function ProductList() {
                                         <div className="product-title">{plant.name}</div>
                                         <p>{plant.description}</p>
                                         <p>{plant.cost}</p>
-                                        <button className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
-                                    </div>
+                                        <button 
+                                            className="product-button" 
+                                            onClick={() => handleAddToCart(plant)} 
+                                            style={{ backgroundColor: addedToCart[plant.name] ? 'gray' : '#4CAF50', color: '#fff' }} // Gray if added
+                                            disabled={addedToCart[plant.name]} // Disable if already added
+                                        >
+                                            {addedToCart[plant.name] ? "Added to Cart" : "Add to Cart"}
+                                        </button>                                  </div>
                                 ))}
                             </div>
                         </div>
